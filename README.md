@@ -27,24 +27,24 @@ Flask
 ![](https://github.com/sindhusha-t/ReceiptsTracking/raw/master/Documentation/Screenshots/Architecture.png)
 
 ## Design and Implementation
-1) In the First step, we created a basic web application where user can select whether to use webcam or upload the images from the local device. User can select multiple images.   
-2) After user uploads the image, the image is classified as whether it is receipt or not.   
-3) About Receipt Classifier ->      
--            a) It internally uses pytesseract to convert the image to text.    
--            b) Using the text it classifies whether the text is actually the receipt content or not.    
--            c) The model for classifying is trained with equal set of images conutaining both Receipts and not Receipts.     
--            d) The model is tested with few receipts where it turned out to classify few and other few receipts which are blur it is unable to identify -> Where this is the problem in converting the image to text format.     
--            e) converting image to text(pytesseract OCR) is not doing that good and so it becomes a hurdle at classifier stage.   
-4) So using the classifier Information we uploaded the images ( identified as receipts ) to the Google Drive Database service.   
-5) After Uploading the images to the server -> We have used Microsoft API service to get the text information from the image.    
--            a) In this initially we thought of using Tesseract OCR, but it is not classifying the words correctly.    
--            b) So we choosed to use Microsoft open API for identifying the text on the Image.    
-6) After Identifying the text from the image -> We have used semantic similarity model to categorize the receipt items into different fields.    
--            a) We have choosed set of category words.    
--            b) On giving a word -> semantic similarity model gives to which category word the input word is closer.    
--            c) So we use that information to categorize the words.    
--            d) This is taking a lot of time to execute. So we are planning to use "clustering" instead of semantic similarity model.   
-7) As it is taking lot of time to categorize, for now we have stored the information in JSON file and displayed the JSON file data in the form of table and also the pie chart view.    
+1. In the First step, we created a basic web application where user can select whether to use webcam or upload the images from the local device. User can select multiple images.   
+2. After user uploads the image, the image is classified as whether it is receipt or not.   
+3. About Receipt Classifier ->                
+        a) It internally uses pytesseract to convert the image to text.             
+        b) Using the text it classifies whether the text is actually the receipt content or not.               
+        c) The model for classifying is trained with equal set of images conutaining both Receipts and not Receipts.              
+        d) The model is tested with few receipts where it turned out to classify few and other few receipts which are blur it is unable to identify -> Where this is the problem in converting the image to text format.                
+        e) converting image to text(pytesseract OCR) is not doing that good and so it becomes a hurdle at classifier stage.          
+4. So using the classifier Information we uploaded the images ( identified as receipts ) to the Google Drive Database service.   
+5. After Uploading the images to the server -> We have used Microsoft API service to get the text information from the image.    
+            a) In this initially we thought of using Tesseract OCR, but it is not classifying the words correctly.    
+            b) So we choosed to use Microsoft open API for identifying the text on the Image.    
+6. After Identifying the text from the image -> We have used semantic similarity model to categorize the receipt items into different fields.    
+            a) We have choosed set of category words.    
+            b) On giving a word -> semantic similarity model gives to which category word the input word is closer.    
+            c) So we use that information to categorize the words.    
+            d) This is taking a lot of time to execute. So we are planning to use "clustering" instead of semantic similarity model.   
+7. As it is taking lot of time to categorize, for now we have stored the information in JSON file and displayed the JSON file data in the form of table and also the pie chart view.    
 
 ## Final Output:
 1. Using command `ng serve` command to start the web application.    
