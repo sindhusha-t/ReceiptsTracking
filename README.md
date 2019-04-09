@@ -11,10 +11,10 @@ Develop mobile app to analyze purchases after scanning a receipt.
 5. Extra points for adding any deep learning aspect in terms of analysis of receipts data.
 
 ## Team Members:
-1. Srividya Varnasi
-2. Chandra Sekhar Pentakota
-3. Srinivas Vidiyala
-4. Sindhusha Tiyyagura
+1. Naga Srividya Varanasi
+2. Chandrasekhar Pentakota
+3. Sindhusha Tiyyagura
+4. Srininvas Vidiyala
 
 ## Technologies Used:
 Angular   
@@ -27,7 +27,24 @@ Flask
 ![](https://github.com/sindhusha-t/ReceiptsTracking/raw/master/Documentation/Screenshots/Architecture.png)
 
 ## Design and Implementation
-
+1) In the First step, we created a basic web application where user can select whether to use webcam or upload the images from the local device. User can select multiple images.   
+2) After user uploads the image, the image is classified as whether it is receipt or not.   
+3) About Receipt Classifier ->      
+            a) It internally uses pytesseract to convert the image to text.    
+            b) Using the text it classifies whether the text is actually the receipt content or not.    
+            c) The model for classifying is trained with equal set of images conutaining both Receipts and not Receipts.     
+            d) The model is tested with few receipts where it turned out to classify few and other few receipts which are blur it is unable to identify -> Where this is the problem in converting the image to text format.     
+            e) converting image to text(pytesseract OCR) is not doing that good and so it becomes a hurdle at classifier stage.   
+4) So using the classifier Information we uploaded the images ( identified as receipts ) to the Google Drive Database service.
+5) After Uploading the images to the server -> We have used Microsoft API service to get the text information from the image.
+            a) In this initially we thought of using Tesseract OCR, but it is not classifying the words correctly.
+            b) So we choosed to use Microsoft open API for identifying the text on the Image.
+6) After Identifying the text from the image -> We have used semantic similarity model to categorize the receipt items into different fields.
+            a) We have choosed set of category words.
+            b) On giving a word -> semantic similarity model gives to which category word the input word is closer.
+            c) So we use that information to categorize the words.
+            d) This is taking a lot of time to execute. So we are planning to use "clustering" instead of semantic similarity model.
+7) As it is taking lot of time to categorize, for now we have stored the information in JSON file and displayed the JSON file data in the form of table and also the pie chart view.
 
 ## Final Output:
 1. Using command `ng serve` command to start the web application.    
@@ -75,6 +92,10 @@ All the receipts information is divided into the categories.
 8. We are dispalying the summarized data in pie chart so that users can easily visualize the data.   
 
 ![](https://github.com/sindhusha-t/ReceiptsTracking/raw/master/Documentation/Screenshots/pie%20chart%20for%20summary.png)
+
+## Strugggles and Issues Faced:
+1) Initially we tried to create Ionic Application -> but we ran out of many issues for building the apk file. The Ionic Application is running completely fine on the web. So we have spent enough amount of time on this and so we shifted to angular for developing web applications.
+2) We thought of using semantic similarity model to train and test the receipt categorization. It is taking hours to categorize a single receipt. So we are planning to change the model.
 
 ## Youtube Link:
 https://www.youtube.com/watch?v=K1BVGcjD4QQ&t=1s
