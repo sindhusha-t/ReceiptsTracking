@@ -24,8 +24,10 @@ Python
 Flask   
 
 ## Architecture:
+![](https://github.com/sindhusha-t/ReceiptsTracking/raw/master/Documentation/Screenshots/Architecture.png)
 
 ## Design and Implementation
+
 
 ## Final Output:
 1. Using command `ng serve` command to start the web application.    
